@@ -1,0 +1,6 @@
+run.config:
+  image: nanobox/build
+  engine: golang
+  engine.config:
+    runtime: go-1.8
+    package: github.com/nanobox-io/nanobox-provider
