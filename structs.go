@@ -33,6 +33,7 @@ type (
 		DefaultPlan string `json:"default_plan"`
 		Rebootable bool `json:"can_reboot"`
 		Renamable bool `json:"can_rename"`
+		SSHKeyMethod string `json:"ssh_key_method"` // reference or object
 		SSHUser string `json:"ssh_user"`
 		ExternalInterface string `json:"external_iface"`
 		InternalInterface string `json:"internal_iface"`
@@ -100,7 +101,7 @@ type (
 	//   "ssh_key": "12345"
 	// }
 	ServerOrder struct {
-		ID string `json:"id"`
+		Name string `json:"name"`
 		Status string `json:"status"`
 		Size string `json:"size"`
 		SSHKey string `json:"ssh_key"`
