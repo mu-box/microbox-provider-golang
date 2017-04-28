@@ -2,6 +2,7 @@ package provider
 
 import (
 	"fmt"
+	"time"
 	"encoding/json"
 
 	"github.com/plimble/ace"
@@ -9,6 +10,7 @@ import (
 
 
 var mux = ace.New()
+
 
 func init() {
 	mux.GET("/meta", metaHandler)
@@ -29,13 +31,25 @@ func metaHandler(c *ace.C) {
 	c.JSON(201, backend.Meta())
 }
 
+var catalogCache []ServerOption
+
 func catalogHandler(c *ace.C) {
-	catalog, err := backend.Catalog()
-	if err != nil {
-		c.String(500, err.Error())
-		return
+	if len(catalogCache) == 0 {
+		var err error
+		catalogCache, err = backend.Catalog()	
+		if err != nil {
+			c.String(500, err.Error())
+			return
+		}
+
+		go func() {
+			// empty the cache every day just to keep up to date
+			<-time.After(24*time.Hour)	
+			catalogCache = []ServerOption{}
+		}()
 	}
-	c.JSON(201, catalog)
+
+	c.JSON(201, catalogCache)
 }
 
 func verifyHandler(c *ace.C) {
