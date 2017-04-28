@@ -24,6 +24,8 @@ func init() {
 	mux.GET("/servers", listServerHandler)
 	mux.GET("/servers/:id", showServerHandler)
 	mux.DELETE("/servers/:id", deleteServerHandler)
+	mux.DELETE("/servers/:id/rename", renameServerHandler)
+	mux.DELETE("/servers/:id/reboot", rebootServerHandler)
 
 }
 
@@ -146,6 +148,28 @@ func deleteServerHandler(c *ace.C) {
 	creds := getCredentials(c)
 	id := c.Param("id")
 	err := backend.DeleteServer(creds, id)
+	if err != nil {
+		c.JSON(400, map[string]string{"error": err.Error()})
+		return
+	}
+	c.String(200, "success")
+}
+
+func rebootServerHandler(c *ace.C) {
+	creds := getCredentials(c)
+	id := c.Param("id")
+	err := backend.RebootServer(creds, id)
+	if err != nil {
+		c.JSON(400, map[string]string{"error": err.Error()})
+		return
+	}
+	c.String(200, "success")
+}
+
+func renameServerHandler(c *ace.C) {
+	creds := getCredentials(c)
+	id := c.Param("id")
+	err := backend.RenameServer(creds, id)
 	if err != nil {
 		c.JSON(400, map[string]string{"error": err.Error()})
 		return

@@ -16,5 +16,5 @@ type BackendAdaptor interface{
 	ShowServer(Credentials, string) (Server, error)
 	DeleteServer(Credentials, string) error
 	RebootServer(Credentials, string) error
-	RestartServer(Credentials, string) error
+	RenameServer(Credentials, string) error
 }
