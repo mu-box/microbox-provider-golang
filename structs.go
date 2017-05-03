@@ -31,6 +31,7 @@ type (
 		NickName string `json:"server_nick_name"`
 		DefaultRegion string `json:"default_region"`
 		DefaultPlan string `json:"default_plan"`
+		DefaultSize string `json:"default_size"`
 		Rebootable bool `json:"can_reboot"`
 		Renamable bool `json:"can_rename"`
 		SSHAuthMethod string `json:"ssh_auth_method"` // key or password
