@@ -46,7 +46,7 @@ type (
 
 	CredentialField struct {
 		Key string `json:"key"`
-		Label string `label:"label"`
+		Label string `json:"label"`
 	}
 
 	// [
