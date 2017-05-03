@@ -180,6 +180,7 @@ func renameServerHandler(c *ace.C) {
 
 
 func getCredentials(c *ace.C) Credentials {
+	fmt.Printf("headers: %#v\n", c.Request.Header)
 	meta := backend.Meta()
 	creds := Credentials{}
 	for _, field := range meta.CredentialFields {
