@@ -188,7 +188,7 @@ func getCredentials(c *ace.C) Credentials {
 		paramKey := "Auth_" + strings.Title(field.Key)
 		paramKey = strings.Replace(paramKey, "-", "_", -1)
 
-		creds[field.Key] = c.Param(paramKey)
+		creds[field.Key] = c.Request.Header.Get(paramKey)
 	}
 	return creds
 }
