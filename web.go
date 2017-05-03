@@ -185,7 +185,7 @@ func getCredentials(c *ace.C) Credentials {
 	creds := Credentials{}
 	for _, field := range meta.CredentialFields {
 		// make the param key look like what odin sends
-		paramKey := "HTTP_AUTH_" + strings.Title(field.Key)
+		paramKey := "Auth_" + strings.Title(field.Key)
 		paramKey = strings.Replace(paramKey, "-", "_", -1)
 
 		creds[field.Key] = c.Param(paramKey)
