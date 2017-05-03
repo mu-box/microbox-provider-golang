@@ -14,6 +14,7 @@ var mux = ace.New()
 
 
 func init() {
+	mux.Use(ace.Logger())
 	mux.GET("/meta", metaHandler)
 	mux.GET("/catalog", catalogHandler)
 	mux.POST("/verify", verifyHandler)
