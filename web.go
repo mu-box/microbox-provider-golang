@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"time"
 	"encoding/json"
+	"strings"
 
 	"github.com/plimble/ace"
 )
@@ -182,6 +183,10 @@ func getCredentials(c *ace.C) Credentials {
 	meta := backend.Meta()
 	creds := Credentials{}
 	for _, field := range meta.CredentialFields {
+		// make the param key look like what odin sends
+		paramKey := "HTTP_AUTH_" + strings.ToUpper(field.Key)
+		paramKey = strings.Replace(paramKey, "-", "_", -1)
+
 		creds[field.Key] = c.Param(field.Key)
 	}
 	return creds
