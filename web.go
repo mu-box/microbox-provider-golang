@@ -187,6 +187,8 @@ func getCredentials(c *ace.C) Credentials {
 		// make the param key look like what odin sends
 		paramKey := "Auth_" + strings.Title(field.Key)
 		paramKey = strings.Replace(paramKey, "-", "_", -1)
+		fmt.Println("key", paramKey)
+		fmt.Println("val", c.Request.Header.Get(paramKey))
 
 		creds[field.Key] = c.Request.Header.Get(paramKey)
 	}
