@@ -37,7 +37,7 @@ type (
 		SSHAuthMethod string `json:"ssh_auth_method"` // key or password
 		SSHKeyMethod string `json:"ssh_key_method"` // reference or object
 		SSHUser string `json:"ssh_user"`
-		ExternalInterface string `json:"external_iface"`
+		ExternalInterface string `json:"external_iface,omitempty"`
 		InternalInterface string `json:"internal_iface"`
 		CredentialFields []CredentialField `json:"credential_fields"`
 		Instructions string `json:"instructions"`
