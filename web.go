@@ -10,11 +10,9 @@ import (
 	"github.com/plimble/ace"
 )
 
+var mux = ace.Default()
 
-var mux *ace.Ace
-
-
-func setup() {
+func init() {
 
 	mux.GET("/meta", metaHandler)
 	mux.GET("/catalog", catalogHandler)
@@ -40,7 +38,7 @@ func redirect(c *ace.C) {
 	    if len(c.Request.URL.RawQuery) > 0 {
 	        target += "?" + c.Request.URL.RawQuery
 	    }			
-		http.Redirect(c.Writer, c.Request, target, http.StatusMovedPermanently)
+		c.Redirect(target)
 		return
 	}
 
