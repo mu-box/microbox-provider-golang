@@ -32,7 +32,7 @@ func setup() {
 // a redirect function
 func redirect(c *ace.C) {
 	fmt.Printf("c.Request.Header: %#v\n\n", c.Request.Header)
-	if c.Request.Header.Get("X-Forwarded-Proto") == "http" {
+	if !(c.Request.Header.Get("X-Forwarded-Proto") == "https") {
 	    target := "https://" + c.Request.Host + c.Request.URL.Path 
 	    if len(c.Request.URL.RawQuery) > 0 {
 	        target += "?" + c.Request.URL.RawQuery
