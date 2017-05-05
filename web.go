@@ -5,7 +5,6 @@ import (
 	"time"
 	"encoding/json"
 	"strings"
-	"net/http"
 
 	"github.com/plimble/ace"
 )
