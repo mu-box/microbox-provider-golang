@@ -11,10 +11,10 @@ import (
 )
 
 
-var mux = ace.Default()
+var mux *ace.Ace
 
 
-func init() {
+func setup() {
 
 	mux.GET("/meta", metaHandler)
 	mux.GET("/catalog", catalogHandler)
