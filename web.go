@@ -14,21 +14,7 @@ var mux = ace.Default()
 
 
 func init() {
-	// redirect if the request came in as non https
-	redirect := func(c *ace.C) {
-		if c.Request.Header.Get("X-Forwarded-Proto") == "http" {
-		    target := "https://" + c.Request.Host + c.Request.URL.Path 
-		    if len(c.Request.URL.RawQuery) > 0 {
-		        target += "?" + c.Request.URL.RawQuery
-		    }			
-			http.Redirect(c.Writer, c.Request, target, http.StatusMovedPermanently)
-			return
-		}
 
-		c.Next()
-	}
-	mux.Use(redirect)
-	
 	mux.GET("/meta", metaHandler)
 	mux.GET("/catalog", catalogHandler)
 	mux.POST("/verify", verifyHandler)
@@ -43,6 +29,20 @@ func init() {
 	mux.DELETE("/servers/:id/rename", renameServerHandler)
 	mux.DELETE("/servers/:id/reboot", rebootServerHandler)
 
+}
+
+// a redirect function
+func redirect(c *ace.C) {
+	if c.Request.Header.Get("X-Forwarded-Proto") == "http" {
+	    target := "https://" + c.Request.Host + c.Request.URL.Path 
+	    if len(c.Request.URL.RawQuery) > 0 {
+	        target += "?" + c.Request.URL.RawQuery
+	    }			
+		http.Redirect(c.Writer, c.Request, target, http.StatusMovedPermanently)
+		return
+	}
+
+	c.Next()
 }
 
 func metaHandler(c *ace.C) {
