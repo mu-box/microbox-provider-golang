@@ -6,7 +6,7 @@ import (
 	"encoding/json"
 	"strings"
 	"net/http"
-	
+
 	"github.com/plimble/ace"
 )
 
@@ -34,6 +34,7 @@ func init() {
 
 // a redirect function
 func redirect(c *ace.C) {
+	fmt.Printf("c.Request.Header: %#v\n\n", c.Request.Header)
 	if c.Request.Header.Get("X-Forwarded-Proto") == "http" {
 	    target := "https://" + c.Request.Host + c.Request.URL.Path 
 	    if len(c.Request.URL.RawQuery) > 0 {
