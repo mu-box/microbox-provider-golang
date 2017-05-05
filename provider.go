@@ -10,6 +10,7 @@ func Start(b BackendAdaptor, secure bool) error {
 	if secure {
 		mux.Use(redirect)
 	}
+	setup()
 	backend = b
 	mux.Run(":8080")
 	return nil
