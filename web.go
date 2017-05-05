@@ -12,6 +12,7 @@ import (
 var mux = ace.Default()
 
 func setup() {
+	mux.Use(redirect)
 	mux.GET("/meta", metaHandler)
 	mux.GET("/catalog", catalogHandler)
 	mux.POST("/verify", verifyHandler)
