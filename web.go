@@ -10,6 +10,18 @@ import (
 )
 
 var mux = ace.Default()
+var catalogCache []ServerOption
+
+func init() {
+	// clear the catalog every 24 hours
+	go func() {
+		for {
+			// empty the cache every day just to keep up to date
+			<-time.After(24*time.Hour)	
+			catalogCache = []ServerOption{}
+		}
+	}()
+}
 
 func setup() {
 	// mux.Use(redirect)
@@ -47,8 +59,6 @@ func metaHandler(c *ace.C) {
 	c.JSON(201, backend.Meta())
 }
 
-var catalogCache []ServerOption
-
 func catalogHandler(c *ace.C) {
 	if len(catalogCache) == 0 {
 		var err error
@@ -58,11 +68,6 @@ func catalogHandler(c *ace.C) {
 			return
 		}
 
-		go func() {
-			// empty the cache every day just to keep up to date
-			<-time.After(24*time.Hour)	
-			catalogCache = []ServerOption{}
-		}()
 	}
 
 	c.JSON(201, catalogCache)
