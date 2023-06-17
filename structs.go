@@ -23,7 +23,7 @@ type (
       //     { key: :secret_access_key, label: 'Secret Access Key' }
       //   ],
       //   instructions:      instructions,
-      //   bootstrap_script:  'https://s3.amazonaws.com/tools.nanobox.io/bootstrap/ubuntu.sh'
+      //   bootstrap_script:  'https://s3.amazonaws.com/tools.microbox.cloud/bootstrap/ubuntu.sh'
       // }
 	Metadata struct {
 		ID string `json:"id"`
@@ -79,7 +79,7 @@ type (
 	}
 
 	// {
-	//   "name": "nanobox-provider-account-ID",
+	//   "name": "microbox-provider-account-ID",
 	//   "key":  "CONTENTS OF PUBLIC KEY"
 	// }
 	KeyOrder struct {
@@ -93,11 +93,11 @@ type (
 	Key struct {
 		ID string `json:"id"`
 		Name string `json:"name"`
-		PublicKey string `json:"public_key"`		
+		PublicKey string `json:"public_key"`
 	}
 
 	// {
-	//   "name":    "nanobox.io-cool-app-do.1.1",
+	//   "name":    "microbox.cloud-cool-app-do.1.1",
 	//   "region":  "sfo1",
 	//   "size":    "a1",
 	//   "ssh_key": "12345"
@@ -107,7 +107,7 @@ type (
 		Region string `json:"region"`
 		Size string `json:"size"`
 		SSHKey string `json:"ssh_key"`
-		
+
 	}
 
 	// id: the server id
